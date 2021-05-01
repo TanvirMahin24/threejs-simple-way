@@ -35,7 +35,10 @@ renderer.setSize(sizes.width, sizes.height);
 //let time = Date.now();
 
 //Clock from three js
-const clock = new THREE.Clock();
+//const clock = new THREE.Clock();
+
+//GSAP
+gsap.to(mesh.position, { x: 2, duration: 3, delay: 1 });
 
 const animation = () => {
   //Time
@@ -45,7 +48,7 @@ const animation = () => {
   //   time = currentTime;
 
   //THREE clock
-  const elapsedTime = clock.getElapsedTime();
+  //const elapsedTime = clock.getElapsedTime();
 
   //console.log(diffTime);
 
@@ -55,8 +58,8 @@ const animation = () => {
   //   mesh.rotation.y += 0.0005 * diffTime;
 
   //using clock from three js
-  camera.position.x = Math.cos(elapsedTime);
-  camera.position.y = Math.sin(elapsedTime);
+  //   camera.position.x = Math.cos(elapsedTime);
+  //   camera.position.y = Math.sin(elapsedTime);
   camera.lookAt(mesh.position);
 
   //Render
