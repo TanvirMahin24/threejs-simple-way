@@ -2,7 +2,7 @@ import "./style.css";
 import * as THREE from "three";
 import * as dat from "dat.gui";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import gsap from "gsap";
+//import imgSrc from "./textures/door/color.jpg";
 
 //Dat Ui instance
 const ui = new dat.GUI();
@@ -23,9 +23,17 @@ const canvas = document.querySelector("canvas.webgl");
 // Scene
 const scene = new THREE.Scene();
 
+//Texture
+const img = new Image();
+const texture = new THREE.Texture(img);
+img.onload = () => {
+  texture.needsUpdate = true;
+};
+img.src = "/textures/door/color.jpg";
+
 // Object
-const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+const geometry = new THREE.BoxBufferGeometry(1, 1, 1);
+const material = new THREE.MeshBasicMaterial({ map: texture });
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 //DEBUG
