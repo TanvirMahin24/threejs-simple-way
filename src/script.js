@@ -24,12 +24,8 @@ const canvas = document.querySelector("canvas.webgl");
 const scene = new THREE.Scene();
 
 //Texture
-const img = new Image();
-const texture = new THREE.Texture(img);
-img.onload = () => {
-  texture.needsUpdate = true;
-};
-img.src = "/textures/door/color.jpg";
+const textureLoader = new THREE.TextureLoader();
+const texture = textureLoader.load("/textures/door/color.jpg");
 
 // Object
 const geometry = new THREE.BoxBufferGeometry(1, 1, 1);
