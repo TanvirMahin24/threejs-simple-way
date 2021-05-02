@@ -23,13 +23,26 @@ const canvas = document.querySelector("canvas.webgl");
 // Scene
 const scene = new THREE.Scene();
 
+//Loading manager
+const loadingManager = new THREE.LoadingManager();
+loadingManager.onStart = () => {
+  console.log("Start");
+};
+loadingManager.onProgress = () => {
+  console.log("Progress");
+};
+loadingManager.onLoad = () => {
+  console.log("Load");
+};
+
 //Texture
-const textureLoader = new THREE.TextureLoader();
-const texture = textureLoader.load("/textures/door/color.jpg");
+const textureLoader = new THREE.TextureLoader(loadingManager);
+const colorTexture = textureLoader.load("/textures/door/color.jpg");
 
 // Object
-const geometry = new THREE.BoxBufferGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ map: texture });
+//const geometry = new THREE.BoxBufferGeometry(1, 1, 1);
+const geometry = new THREE.SphereBufferGeometry(1, 32, 32);
+const material = new THREE.MeshBasicMaterial({ map: colorTexture });
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 //DEBUG
