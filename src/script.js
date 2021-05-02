@@ -38,10 +38,17 @@ loadingManager.onLoad = () => {
 //Texture
 const textureLoader = new THREE.TextureLoader(loadingManager);
 const colorTexture = textureLoader.load("/textures/door/color.jpg");
+// colorTexture.repeat.x = 3;
+// colorTexture.repeat.y = 2;
+// colorTexture.wrapS = THREE.RepeatWrapping;
+// colorTexture.wrapT = THREE.RepeatWrapping;
+colorTexture.rotation = Math.PI / 4;
+colorTexture.center.x = 0.5;
+colorTexture.center.y = 0.5;
 
 // Object
-//const geometry = new THREE.BoxBufferGeometry(1, 1, 1);
-const geometry = new THREE.SphereBufferGeometry(1, 32, 32);
+const geometry = new THREE.BoxBufferGeometry(1, 1, 1);
+//const geometry = new THREE.SphereBufferGeometry(1, 32, 32);
 const material = new THREE.MeshBasicMaterial({ map: colorTexture });
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
