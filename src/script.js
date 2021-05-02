@@ -1,6 +1,11 @@
 import "./style.css";
 import * as THREE from "three";
+import * as dat from "dat.gui";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import gsap from "gsap";
+
+//Dat Ui instance
+const ui = new dat.GUI();
 
 //CURSOR
 const cursor = {
@@ -23,6 +28,19 @@ const geometry = new THREE.BoxGeometry(1, 1, 1);
 const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
+//DEBUG
+ui.add(mesh.position, "x", -3, 3, 0.001);
+ui.add(mesh.position, "y", -3, 3, 0.001);
+ui.add(mesh.position, "z", -3, 3, 0.001);
+
+ui.add(material, "wireframe");
+const perameters = {
+  color: 0xff0000,
+  spin: () => {},
+};
+ui.addColor(perameters, "color").onChange(() => {
+  material.color.set(perameters.color);
+});
 
 // Sizes
 const sizes = {
