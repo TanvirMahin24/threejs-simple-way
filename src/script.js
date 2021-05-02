@@ -2,7 +2,7 @@ import "./style.css";
 import * as THREE from "three";
 import * as dat from "dat.gui";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import gsap from "gsap";
+//import imgSrc from "./textures/door/color.jpg";
 
 //Dat Ui instance
 const ui = new dat.GUI();
@@ -23,9 +23,33 @@ const canvas = document.querySelector("canvas.webgl");
 // Scene
 const scene = new THREE.Scene();
 
+//Loading manager
+const loadingManager = new THREE.LoadingManager();
+loadingManager.onStart = () => {
+  console.log("Start");
+};
+loadingManager.onProgress = () => {
+  console.log("Progress");
+};
+loadingManager.onLoad = () => {
+  console.log("Load");
+};
+
+//Texture
+const textureLoader = new THREE.TextureLoader(loadingManager);
+const colorTexture = textureLoader.load("/textures/door/color.jpg");
+// colorTexture.repeat.x = 3;
+// colorTexture.repeat.y = 2;
+// colorTexture.wrapS = THREE.RepeatWrapping;
+// colorTexture.wrapT = THREE.RepeatWrapping;
+colorTexture.rotation = Math.PI / 4;
+colorTexture.center.x = 0.5;
+colorTexture.center.y = 0.5;
+
 // Object
-const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+const geometry = new THREE.BoxBufferGeometry(1, 1, 1);
+//const geometry = new THREE.SphereBufferGeometry(1, 32, 32);
+const material = new THREE.MeshBasicMaterial({ map: colorTexture });
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 //DEBUG
